@@ -1,0 +1,4847 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--
+			ExtentReports Library 2.41.1 | http://relevantcodes.com/extentreports-for-selenium/ | https://github.com/anshooarora/
+			Copyright (c) 2015, Anshoo Arora (Relevant Codes) | Copyrights licensed under the New BSD License | http://opensource.org/licenses/BSD-3-Clause
+			Documentation: http://extentreports.relevantcodes.com 
+		-->
+
+		<meta charset='UTF-8' /> 
+		<meta name='description' content='ExtentReports (by Anshoo Arora) is a reporting library for automation testing for .NET and Java. It creates detailed and beautiful HTML reports for modern browsers. ExtentReports shows test and step summary along with dashboards, system and environment details for quick analysis of your tests.' />
+		<meta name='robots' content='noodp, noydir' />
+		<meta name='viewport' content='width=device-width, initial-scale=1' />
+		<meta name='extentx' id='extentx' content='' />
+		
+		<title>
+				ExtentReports 2.0
+		</title>
+		
+		
+		<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+		<link href='https://cdn.rawgit.com/anshooarora/extentreports/6032d73243ba4fe4fb8769eb9c315d4fdf16fe68/cdn/extent.css' type='text/css' rel='stylesheet' />
+		
+		<style>
+				
+            
+                
+            
+        
+		</style>
+	</head>
+	
+	
+	<body class='extent default standard hide-overflow'>
+		<!-- nav -->
+		<nav>
+			<div class='logo-container blue darken-2'>
+				<a class='logo-content' href='http://extentreports.relevantcodes.com'>
+					<span>ExtentReports</span>
+				</a>
+				<a href='#' data-activates='slide-out' class='button-collapse hide-on-large-only'><i class='mdi-navigation-apps'></i></a>
+			</div>
+			<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+				<li class='analysis waves-effect active'><a href='#!' class='test-view' onclick="_updateCurrentStage(0)"><i class='mdi-action-dashboard'></i>Test Details</a></li>
+				<li class='analysis waves-effect'>
+					<a href='#!' onclick="_updateCurrentStage(-1)" class='dashboard-view'><i class='mdi-action-track-changes'></i></i>Analysis</a>
+				</li>
+			</ul>
+			<span class='report-name'>Automation Report</span> <span class='report-headline'></span>
+			<ul class='right hide-on-med-and-down nav-right'>
+				<li class='theme-selector' alt='Click to toggle dark theme. To enable by default, use js configuration $("body").addClass("dark");' title='Click to toggle dark theme. To enable by default, use js configuration $("body").addClass("dark");'>
+					<i class='mdi-hardware-desktop-windows'></i>
+				</li>
+				<li>
+					<span class='suite-started-time'>2020-06-22 15:06:12</span>
+				</li>
+				<li>
+					<span>v2.41.1</span>
+				</li>
+			</ul>
+		</nav>
+		<!-- /nav -->
+		
+		<!-- container -->
+		<div class='container'>
+			
+			<!-- dashboard -->
+			<div id='dashboard-view' class='row'>
+				<div class='time-totals'>
+					<div class='col l2 m4 s6'>
+						<div class='card suite-total-tests'> 
+							<span class='panel-name'>Total Tests</span> 
+							<span class='total-tests'> <span class='panel-lead'></span> </span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s6'>
+						<div class='card suite-total-steps'> 
+							<span class='panel-name'>Total Steps</span> 
+							<span class='total-steps'> <span class='panel-lead'></span> </span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s12'>
+						<div class='card suite-total-time-current'> 
+							<span class='panel-name'>Total Time Taken (Current Run)</span> 
+							<span class='suite-total-time-current-value panel-lead'>0h 0m 8s+237ms</span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s12'>
+						<div class='card suite-total-time-overall'> 
+							<span class='panel-name'>Total Time Taken (Overall)</span> 
+							<span class='suite-total-time-overall-value panel-lead'>0h 0m 8s+237ms</span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s6 suite-start-time'>
+						<div class='card accent green-accent'> 
+							<span class='panel-name'>Start</span> 
+							<span class='panel-lead suite-started-time'>2020-06-22 15:06:04</span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s6 suite-end-time'>
+						<div class='card accent pink-accent'> 
+							<span class='panel-name'>End</span> 
+							<span class='panel-lead suite-ended-time'>2020-06-22 15:06:12</span> 
+						</div> 
+					</div>
+				</div>
+				<div class='charts'>
+					<div class='col s12 m6 l4 fh'> 
+						<div class='card-panel'> 
+							<div>
+								<span class='panel-name'>Tests View</span>
+							</div> 
+							<div class='panel-setting modal-trigger test-count-setting right'>
+								<a href='#test-count-setting'><i class='mdi-navigation-more-vert text-md'></i></a>
+							</div> 
+							<div class='chart-box'>
+								<canvas class='text-centered' id='test-analysis'></canvas>
+							</div> 
+							<div>
+								<span class='weight-light'><span class='t-pass-count weight-normal'></span> test(s) passed</span>
+							</div> 
+							<div>
+								<span class='weight-light'><span class='t-fail-count weight-normal'></span> test(s) failed, <span class='t-others-count weight-normal'></span> others</span>
+							</div> 
+						</div> 
+					</div> 
+					<div class='col s12 m6 l4 fh'> 
+						<div class='card-panel'> 
+							<div>
+								<span class='panel-name'>Steps View</span>
+							</div> 
+							<div class='panel-setting modal-trigger step-status-filter right'>
+								<a href='#step-status-filter'><i class='mdi-navigation-more-vert text-md'></i></a>
+							</div> 
+							<div class='chart-box'>
+								<canvas class='text-centered' id='step-analysis'></canvas>
+							</div> 
+							<div>
+								<span class='weight-light'><span class='s-pass-count weight-normal'></span> step(s) passed </span>
+							</div> 
+							<div>
+								<span class='weight-light'><span class='s-fail-count weight-normal'></span> step(s) failed, <span class='s-others-count weight-normal'></span> others</span>
+							</div> 
+						</div> 
+					</div>
+					<div class='col s12 m12 l4 fh'> 
+						<div class='card-panel'> 
+							<span class='panel-name'>Pass Percentage</span> 
+							<span class='pass-percentage panel-lead'></span> 
+							<div class='progress light-blue lighten-3'> 
+								<div class='determinate light-blue'></div> 
+							</div> 
+						</div> 
+					</div>
+				</div>
+				<div class='system-view'>
+					<div class='col l4 m12 s12'>
+						<div class='card-panel'>
+							<span class='label info outline right'>Environment</span>
+							<table>
+								<thead>
+									<tr>
+										<th>Param</th>
+										<th>Value</th>
+									</tr>
+								</thead>
+								<tbody>
+										<tr>
+											<td>User Name</td>
+											<td>E565799</td>
+										</tr>
+										<tr>
+											<td>OS</td>
+											<td>Windows 10</td>
+										</tr>
+										<tr>
+											<td>Java Version</td>
+											<td>1.8.0_181</td>
+										</tr>
+										<tr>
+											<td>Host Name</td>
+											<td>B30614D</td>
+										</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /dashboard -->
+			
+			<!-- tests -->
+			<div id='test-view' class='row _addedTable'>
+				<div class='col _addedCell1'>
+					<div class='contents'>
+						<div class='card-panel heading'>
+							<h5>Tests</h5>
+						</div>
+						<div class='card-panel filters'>
+							<div>
+								<a class='dropdown-button btn-floating btn-small waves-effect waves-light grey tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+									<i class='mdi-action-reorder'></i>
+								</a>
+								<ul id='tests-toggle' class='dropdown-content'>
+									<li class='pass'><a href='#!'>Pass</a></li>
+									<li class='fail'><a href='#!'>Fail</a></li>
+									<li class='skip'><a href='#!'>Skip</a></li>
+									<li class='divider'></li>
+									<li class='clear'><a href='#!'>Clear Filters</a></li>
+								</ul>
+							</div>
+							<div>
+								<a class='btn-floating btn-small waves-effect waves-light grey' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+									<i class='mdi-navigation-close'></i>
+								</a>
+							</div>
+							<div>
+								<a class='btn-floating btn-small waves-effect waves-light grey' id='enableDashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+									<i class='mdi-action-track-changes'></i>
+								</a>
+							</div>
+							<div>
+								<a class='btn-floating btn-small waves-effect waves-light blue enabled' id='refreshCharts' alt='Refresh Charts on Filters' title='Refresh Charts on Filters'>
+									<i class='mdi-navigation-refresh'></i>
+								</a>
+							</div>
+							<div class='search' alt='Search Tests' title='Search Tests'>
+								<div class='input-field left'>
+									<input id='searchTests' type='text' class='validate' placeholder='Search Tests...'>
+								</div>
+								<a href="#" class='btn-floating btn-small waves-effect waves-light grey'>
+									<i class='mdi-action-search'></i>
+								</a>
+							</div>
+						</div>
+						<div class='card-panel no-padding-h no-padding-v no-margin-v'>
+							<div class='wrapper'>
+								<ul id='test-collection' class='test-collection'>
+										<li class='collection-item test displayed active pass ' extentid='1c973c54-c6da-4a1b-a003-a6b88fe1e7f5'>
+											<div class='test-head'>
+												<span class='test-name'> </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-06-22 15:06:05</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:05</td>
+																	<td class='step-details'>Configuration file loaded Successfully</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='48ec676a-a015-4f81-a6b3-5737bf215041'>
+											<div class='test-head'>
+												<span class='test-name'>TC001_VerifyAPIResponse </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-06-22 15:06:07</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:07</td>
+																	<td class='step-details'>TC001_VerifyAPIResponse</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:07</td>
+																	<td class='step-details'>Test Starting......</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>Response Headers:<br>Expires=0
+Cache-Control=no-store, no-cache, must-revalidate, private
+Content-Type=application/json
+Transfer-Encoding=chunked
+Date=Mon, 22 Jun 2020 13:06:09 GMT
+Server=-</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>Response Body:<br>{
+  "physicalSiteId": "X234567890",
+  "pdvInfoList": [
+    {
+      "famillePieceGeneriqueList": {
+        "choixGlobal": 3,
+        "choixPGSimple": 0,
+        "choixPGRemplacement": 0,
+        "famillePieceGenerique": [
+          {
+            "codeFamille": "002124",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0257726589257smp",
+                "ordre": 0
+              }
+            ],
+            "pieceGeneriqueCount": 1
+          },
+          {
+            "codeFamille": "003234",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0195426126283mff",
+                "ordre": 0
+              },
+              {
+                "codeDESI": "0166684262018vZu",
+                "ordre": 1
+              },
+              {
+                "codeDESI": "0162879230148fYK",
+                "ordre": 2
+              },
+              {
+                "codeDESI": "0162879060876Nti",
+                "ordre": 3
+              },
+              {
+                "codeDESI": "0223183273024Jku",
+                "ordre": 4
+              },
+              {
+                "codeDESI": "0193728903567ejX",
+                "ordre": 5
+              },
+              {
+                "codeDESI": "0162879346176EcC",
+                "ordre": 6
+              },
+              {
+                "codeDESI": "0162879389516DBP",
+                "ordre": 7
+              },
+              {
+                "codeDESI": "0162879446206Psy",
+                "ordre": 8
+              },
+              {
+                "codeDESI": "0375841898132VxK",
+                "ordre": 9
+              }
+            ],
+            "pieceGeneriqueCount": 10
+          },
+          {
+            "codeFamille": "003299",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0162879959724xeo",
+                "ordre": 0
+              },
+              {
+                "codeDESI": "0162880061568Epm",
+                "ordre": 1
+              }
+            ],
+            "pieceGeneriqueCount": 2
+          },
+          {
+            "codeFamille": "003304",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0162879810857IpF",
+                "ordre": 0
+              },
+              {
+                "codeDESI": "0162879642530HMk",
+                "ordre": 1
+              },
+              {
+                "codeDESI": "0379233195487TMR",
+                "ordre": 3
+              }
+            ],
+            "pieceGeneriqueCount": 3
+          },
+          {
+            "codeFamille": "014875",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0205111943559dqb",
+                "ordre": 0
+              },
+              {
+                "codeDESI": "0205111902579kkm",
+                "ordre": 1
+              },
+              {
+                "codeDESI": "0162878475297Icv",
+                "ordre": 2
+              },
+              {
+                "codeDESI": "0162878490427Bkf",
+                "ordre": 3
+              },
+              {
+                "codeDESI": "0162878502337fsb",
+                "ordre": 4
+              },
+              {
+                "codeDESI": "0162878693727YUf",
+                "ordre": 5
+              },
+              {
+                "codeDESI": "0162878705508AEy",
+                "ordre": 6
+              },
+              {
+                "codeDESI": "0162878788605kAS",
+                "ordre": 7
+              },
+              {
+                "codeDESI": "0162879066916lkQ",
+                "ordre": 8
+              },
+              {
+                "codeDESI": "0162879090427mOf",
+                "ordre": 9
+              },
+              {
+                "codeDESI": "0162879122717qiM",
+                "ordre": 10
+              },
+              {
+                "codeDESI": "0162879135517FxC",
+                "ordre": 11
+              },
+              {
+                "codeDESI": "0162879190569IWf",
+                "ordre": 12
+              },
+              {
+                "codeDESI": "0162879081137KWf",
+                "ordre": 13
+              }
+            ],
+            "pieceGeneriqueCount": 14
+          },
+          {
+            "codeFamille": "016401",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0203314234765vrl",
+                "referenceLocale": "9726079",
+                "ordre": 0
+              },
+              {
+                "codeDESI": "0238550893665oMt",
+                "ordre": 1
+              }
+            ],
+            "pieceGeneriqueCount": 2
+          },
+          {
+            "codeFamille": "016787",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0262485796718CNy",
+                "ordre": 0
+              },
+              {
+                "codeDESI": "0262485852502XqL",
+                "ordre": 1
+              }
+            ],
+            "pieceGeneriqueCount": 2
+          },
+          {
+            "codeFamille": "12453",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0162878723278Enj",
+                "ordre": 0
+              },
+              {
+                "codeDESI": "0164092892750BQm",
+                "ordre": 1
+              },
+              {
+                "codeDESI": "0162878949837XtF",
+                "ordre": 3
+              }
+            ],
+            "pieceGeneriqueCount": 3
+          }
+        ],
+        "famillePieceGeneriqueCount": 8
+      },
+      "reparateur": {
+        "activite": [],
+        "tauxMO": [
+          {
+            "typeTaux": "1",
+            "valeurTauxHTActuel": 65.83,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "2",
+            "valeurTauxHTActuel": 45.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "3",
+            "valeurTauxHTActuel": 45.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "C1",
+            "valeurTauxHTActuel": 63.33,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "C2",
+            "valeurTauxHTActuel": 0.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "C3",
+            "valeurTauxHTActuel": 0.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "E1",
+            "valeurTauxHTActuel": 50.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "E2",
+            "valeurTauxHTActuel": 64.22,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "E3",
+            "valeurTauxHTActuel": 67.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "M1",
+            "valeurTauxHTActuel": 91.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "M2",
+            "valeurTauxHTActuel": 75.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "M3",
+            "valeurTauxHTActuel": 72.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "P1",
+            "valeurTauxHTActuel": 0.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "P2",
+            "valeurTauxHTActuel": 36.5,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "P3",
+            "valeurTauxHTActuel": 0.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "S 2",
+            "valeurTauxHTActuel": 120.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "S1",
+            "valeurTauxHTActuel": 63.33,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "S2",
+            "valeurTauxHTActuel": 0.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "S3",
+            "valeurTauxHTActuel": 0.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "T1",
+            "valeurTauxHTActuel": 50.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "T2",
+            "valeurTauxHTActuel": 63.33,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "T3",
+            "valeurTauxHTActuel": 70.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "X1",
+            "valeurTauxHTActuel": 50.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "c1",
+            "valeurTauxHTActuel": 11.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "ptest",
+            "valeurTauxHTActuel": 20.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "s2",
+            "valeurTauxHTActuel": 40.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "test",
+            "valeurTauxHTActuel": 10.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          }
+        ],
+        "caracteristique": [
+          {
+            "identifiant": "CA_1371",
+            "valeur": "11003",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1399",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1408",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1410",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_commandesInternet",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1500",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1521",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_ecransynthese",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_commandesPR",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Pnr_CRM_PDV",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BVV_ACTIVATION",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Retour_act",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PRI_001",
+            "valeur": "2945",
+            "libelle": "Oui, avec une interface \u003e ou \u003d V11 ",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PRI_002",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PRI_003",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "RDVINTERNET",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DiffusionRVI",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "URL",
+            "valeur": "0",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Page_Accueil",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DMS_PROTOCOLE",
+            "valeur": "3006",
+            "libelle": "internet (HTTPS)",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "AGA_ACTEUR_SMS",
+            "valeur": "3045",
+            "libelle": "Digitaleo",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PRI_005",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Immat",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_Act",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_Act_PRE",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_MONT_Min_Avoir",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_MONT_Max_Avoir",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_Val_Min_PRE",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_VER",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_Age_Min",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_TVA_PRE",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_TVA_PR",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BVV_ACTIF",
+            "valeur": "3127",
+            "libelle": "Production ",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_3523",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "AGA_LCD",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "ActivMyQual",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_MADD_INV",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OLB_LATENCE_FIL_B2B",
+            "valeur": "3386",
+            "libelle": "2",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OLB_LATENCE_PDV_B2B",
+            "valeur": "3393",
+            "libelle": "2",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OLB_LATENCE_FIL_B2C",
+            "valeur": "3400",
+            "libelle": "2",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OLB_LATENCE_PDV_B2C",
+            "valeur": "3407",
+            "libelle": "2",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pmm_mq_recep",
+            "valeur": "3565",
+            "libelle": "Peugeot",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pmm_mq_nav",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "FDZ_Acces_Doc_Gratuite",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DMS_TOKEN",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Tp_start",
+            "valeur": "2019-04-23",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Tp_end",
+            "valeur": "2019-04-30",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "xxxxx",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_CONTROL_VISUAL",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CMM_nouvcat",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CMM_Plaque_nouvcat",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "niv_abonnement",
+            "valeur": "3705",
+            "libelle": "4",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "date_fin_valid",
+            "valeur": "2099-06-13",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "nbre_login_autor",
+            "valeur": "34",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Videocheck",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_OI_DOPR_CONTROL",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Distrib_DPR2A",
+            "valeur": "test",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OV_BRAND",
+            "valeur": "3726",
+            "libelle": "VAUXHALL",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Recept_mm",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "test",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "acces_epaiement_client",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_639",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "RUM_TRACK",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TMTS_Activation",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "JBN_ACTIVATION_MENU_PE",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "JBN_URL_CATALOGUE_PRE",
+            "valeur": "http://precisrec.sidexa.fr/mpsa_servicebox_sso.php",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OVDC",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OVPC",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "LIEN_TMTS",
+            "valeur": "https://ppr.lead.services-store.peugeot.com/",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Paiement_ligne_ouv_col",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TMTS_Activationreport",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TEST_CARAC_O_N",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "MEPNOVEMBRE",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "isOVSAGAIeRECADeployed",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DMS_CORS_SECURE_KEY",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DMS_SUPPORTS_SECURE_CORS",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_8433",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "ISOLVE_available",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_MAG_OV",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_MAG_UI",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "delegation_tec_achat_diag",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_MAG_STOCK",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "QRCODE_ACTIF",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PowerReturn_NewPart",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PowerReturn_Quality",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PowerReturn_Deposit",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PowerReturn_Discrepancies",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PowerReturn_Warranty",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Wallbox",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_commandesinternes",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "AGA_ACTIVATION",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_SAGAI_CPR",
+            "valeur": "1",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_933",
+            "valeur": "10403",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DMS_INTERFACE",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "IP_DMS",
+            "valeur": "186316m-test-dmsservices.fr-midrange.com",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PORT_DMS",
+            "valeur": "443",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TYPE_DMS",
+            "valeur": "428",
+            "libelle": "REYNOLDS \u0026 REYNOLDS - DCSNET NEO",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DelaiAlerteRest",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Citroenoblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Peugeotoblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DSoblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Citroen",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Peugeot",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DS",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Dos_ficheretour",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Dos_ficheretouche",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "trav_ht",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvCarross_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvDiag_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvMeca_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvEntretien_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvSansRdv_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvAttend_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvVeh_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvAttsRdv_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvCarross",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvDiag",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvMeca",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvEntretien",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvSansRdv",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvAttend",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvAttsRdv",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvVeh",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "ChAffMoy",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Obj_ficheretouche_sem",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Obj_ficheretouche_mois",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Obj_ficheretouche_an",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Obj_ficheretour_sem",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Obj_ficheretour_mois",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Obj_ficheretour_an",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PlanCtrlQual_sem",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PlanCtrlQual_mois",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PlanCtrlQual_an",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CpteurObeya",
+            "valeur": "0",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "ActivFiltre",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          }
+        ],
+        "caracteristiqueTab": [
+          {
+            "identifiant": "ORIGINE",
+            "cles": [
+              "001",
+              "002",
+              "C34",
+              "101",
+              "010",
+              "BPA",
+              "A05",
+              "f76",
+              "ACZ",
+              "124",
+              "GL2",
+              "126",
+              "C2o",
+              "003",
+              "GV1",
+              "a49",
+              "APV",
+              "L01",
+              "MR1",
+              "309",
+              "AM1",
+              "AM2",
+              "999",
+              "MPR",
+              "501",
+              "401"
+            ],
+            "valeurs": [
+              "ATELIER",
+              "MAGASIN",
+              "italie",
+              "BPA",
+              "lulu",
+              "BPA2",
+              "W1",
+              "Rapide",
+              "GA",
+              "sage",
+              "APV LA ISABELLE",
+              "cogestib br",
+              "PEssac2 - C2o",
+              "berri",
+              "Sidauto v2 formation AP",
+              "Pessac1",
+              "APV",
+              "Incadea",
+              "Sidauto v2 formation AC",
+              "ADP EVA",
+              "Sidauto2",
+              "carroserie",
+              "atte",
+              "Midrange",
+              "Rennes",
+              "401-XDEMO1A"
+            ],
+            "anyObject": [],
+            "anyObjectCount": 0,
+            "clesCount": 26,
+            "valeursCount": 26
+          },
+          {
+            "identifiant": "IMPUTATION",
+            "cles": [
+              "C34",
+              "FOR",
+              "7",
+              "3",
+              "4",
+              "5"
+            ],
+            "valeurs": [
+              "italie",
+              "FORFAIT",
+              "602222",
+              "060273",
+              "B60415",
+              "input_constr"
+            ],
+            "anyObject": [],
+            "anyObjectCount": 0,
+            "clesCount": 6,
+            "valeursCount": 6
+          }
+        ],
+        "identifiantReseau": "XDEMO1A01 ",
+        "anyObject": [],
+        "anyObjectCount": 0,
+        "caracteristiqueCount": 135,
+        "caracteristiqueTabCount": 2,
+        "tauxMOCount": 27,
+        "activiteCount": 0
+      },
+      "pointDeVente": {
+        "denominationSociale": "RA DEMO",
+        "formeJuridique": "SARL",
+        "identifiantJuridique": "Identifiant jur                                                 ",
+        "statut": true,
+        "etablissement": [
+          {
+            "identifiantReseau": "XDEMO1A01 ",
+            "nomCommercial": "RA DEMO",
+            "adresse": [
+              {
+                "ville": "PARIS",
+                "codePostal": "75017",
+                "codePaysISO": {
+                  "type": 77,
+                  "stringValue": "FR"
+                },
+                "ligne": [
+                  "Colisée 1 68, rue Arago"
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "025054510",
+                "fax": "0354554510",
+                "email": "demo.brr@mpsa.com",
+                "libellePosteDeTravail": "SIDM/AGTD/AVRE"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "REYNOLDS \u0026 REYNOLDS - DCSNET NEO",
+                "ipdms": "186316m-test-dmsservices.fr-midrange.com",
+                "portDMS": 443,
+                "dmsinterface": true,
+                "anyObject": [],
+                "portDMSInt": 443,
+                "anyObjectCount": 0
+              }
+            ],
+            "fuseauHoraire": {
+              "javaTimeZoneId": "Egypt",
+              "decalageHoraire": 7200000,
+              "utiliseHeureEte": false,
+              "forcerNonUtilisationHeureEteHiver": false,
+              "anyObject": [],
+              "anyObjectCount": 0
+            },
+            "codeLangueISO": {
+              "type": 40,
+              "stringValue": "fr"
+            },
+            "anyObject": [],
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          }
+        ],
+        "numeroRegistreCommerce": "registre du commerce",
+        "numeroTVA": "Code TVA                                                    ",
+        "numeroFitche": "1                                                               ",
+        "anyObject": [],
+        "identifiantReseau": "XDEMO1A",
+        "sagaiCode": "029510K",
+        "contrat": [
+          {
+            "typeContrat": "APV",
+            "marqueContrat": "AP",
+            "numeroContrat": "nullAPV",
+            "dateDebut": 1568757600000,
+            "dateFin": 4102354800000,
+            "anyObject": [],
+            "anyObjectCount": 0
+          }
+        ],
+        "marquePSA": {
+          "type": 0,
+          "stringValue": "AP"
+        },
+        "tauxTVA": 22.0,
+        "typeClient": "DPR",
+        "codeZonePR": "FR",
+        "codeZoneMO": "MO7",
+        "codeDeviseISO": {
+          "type": 50,
+          "stringValue": "EUR"
+        },
+        "contratCount": 1,
+        "anyObjectCount": 0,
+        "etablissementCount": 1
+      },
+      "contacts": {
+        "contact": [
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 2,
+            "numContact": 1,
+            "nomContact": "SIDM/AGTD/AVRE",
+            "prenomContact": "",
+            "telContact": "025054510",
+            "faxContact": "0354554510",
+            "emailContact": "demo.brr@mpsa.com",
+            "mobileContact": "",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1447249141000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 150,
+            "numContact": 2,
+            "nomContact": "BIGAND",
+            "prenomContact": "HERVE",
+            "telContact": "0161452891",
+            "faxContact": "0161454455",
+            "emailContact": "herve.bigand@mpsa.com",
+            "mobileContact": "",
+            "idUser": "U020499",
+            "idCivilite": 1,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1309452804000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 177,
+            "numContact": 3,
+            "nomContact": "PICHON",
+            "prenomContact": "Grérad",
+            "telContact": "2324242",
+            "faxContact": "",
+            "emailContact": "",
+            "mobileContact": "",
+            "idCivilite": 1,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1554459959000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 133,
+            "numContact": 4,
+            "nomContact": "BIGAND",
+            "prenomContact": "HERVE",
+            "telContact": "368161",
+            "faxContact": "0158797848",
+            "emailContact": "herve.bigand@mpsa.com",
+            "mobileContact": "",
+            "idUser": "U020497",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1273498373000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 134,
+            "numContact": 5,
+            "nomContact": "DUPONT",
+            "prenomContact": "JEAN",
+            "telContact": "0145667787",
+            "faxContact": "",
+            "emailContact": "jean.dupont@legaragepeugeot.com",
+            "mobileContact": "",
+            "idUser": "D661360",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1247090400000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 141,
+            "numContact": 6,
+            "nomContact": "DA SILVA",
+            "prenomContact": "",
+            "telContact": "0140665508",
+            "faxContact": "",
+            "emailContact": "",
+            "mobileContact": "",
+            "idUser": "u187968",
+            "idCivilite": 1,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1257807600000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 141,
+            "numContact": 7,
+            "nomContact": "FOURNIER",
+            "prenomContact": "",
+            "telContact": "0140665508",
+            "faxContact": "",
+            "emailContact": "",
+            "mobileContact": "",
+            "idUser": "u187969",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1257807600000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 141,
+            "numContact": 8,
+            "nomContact": "LOPES",
+            "prenomContact": "",
+            "telContact": "0140665508",
+            "faxContact": "",
+            "emailContact": "",
+            "mobileContact": "",
+            "idUser": "u187967",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1257807600000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 141,
+            "numContact": 9,
+            "nomContact": "SANCHEZ",
+            "prenomContact": "",
+            "telContact": "0140665508",
+            "faxContact": "",
+            "emailContact": "",
+            "mobileContact": "",
+            "idUser": "u187966",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1257807600000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 141,
+            "numContact": 10,
+            "nomContact": "MARTIN",
+            "prenomContact": "",
+            "telContact": "0140665508",
+            "faxContact": "",
+            "emailContact": "",
+            "mobileContact": "",
+            "idUser": "u187965",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1257807600000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 143,
+            "numContact": 15,
+            "nomContact": "KHAJI",
+            "prenomContact": "NADIA",
+            "telContact": "452097",
+            "faxContact": "",
+            "emailContact": "nadia.khaji@ext.mpsa.com",
+            "mobileContact": "",
+            "idUser": "e359636",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1271078564000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 141,
+            "numContact": 16,
+            "nomContact": "TOURNEUX",
+            "prenomContact": "GUILLAUME",
+            "telContact": "0146906484",
+            "faxContact": "",
+            "emailContact": "guillaume.tourneux@mpsa.com",
+            "mobileContact": "",
+            "idUser": "U331481",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1273498191000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 135,
+            "numContact": 17,
+            "nomContact": "MATHIEU",
+            "prenomContact": "DAVID",
+            "telContact": "452235",
+            "faxContact": "",
+            "emailContact": "david.mathieu@ext.mpsa.com",
+            "mobileContact": "",
+            "idUser": "E462481",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1426265939000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 145,
+            "numContact": 18,
+            "nomContact": "DURAN",
+            "prenomContact": "",
+            "telContact": "0123456789",
+            "faxContact": "",
+            "emailContact": "frederic.duran@mpsa.com",
+            "mobileContact": "",
+            "idCivilite": 1,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1467816202000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 143,
+            "numContact": 123,
+            "nomContact": "test",
+            "prenomContact": "test2",
+            "telContact": "1234567",
+            "faxContact": "",
+            "emailContact": "",
+            "mobileContact": "",
+            "idCivilite": 1,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1526190985000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 133,
+            "numContact": 12345678,
+            "nomContact": "dssd",
+            "prenomContact": "sdsd",
+            "telContact": "21345678",
+            "faxContact": "",
+            "emailContact": "",
+            "mobileContact": "",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1527570809000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 141,
+            "numContact": 12345679,
+            "nomContact": "Julian",
+            "prenomContact": "",
+            "telContact": "1089839",
+            "faxContact": "",
+            "emailContact": "",
+            "mobileContact": "",
+            "idCivilite": 3,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1543500893000
+          },
+          {
+            "codePDV": "XDEMO1A",
+            "codeAdresse": "01 ",
+            "idTypeContact": 150,
+            "numContact": 12345680,
+            "nomContact": "SEGAUT",
+            "prenomContact": "ROMAIN",
+            "telContact": "0632145687",
+            "faxContact": "",
+            "emailContact": "",
+            "mobileContact": "",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1550069131000
+          }
+        ],
+        "contactCount": 18
+      },
+      "lienRADPR": {
+        "radpr": [
+          {
+            "identifiantReseau": "X957705",
+            "nomCommercial": "james edison",
+            "adresse": [
+              {
+                "ville": "csdf",
+                "codePostal": "dfs23",
+                "codePaysISO": {
+                  "type": 77,
+                  "stringValue": "FR"
+                },
+                "ligne": [
+                  "sdfsfs"
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "23442",
+                "email": "jj@h.com",
+                "libellePosteDeTravail": "james edison"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 40,
+              "stringValue": "fr"
+            },
+            "anyObject": [],
+            "dprparDefaut": false,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "priceCondition": 1,
+            "facturation": 0,
+            "autorisation": 0,
+            "detailSite": 0,
+            "manquant": 0,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          },
+          {
+            "identifiantReseau": "XAPFR04",
+            "nomCommercial": "DISTRIBUTEUR 04",
+            "adresse": [
+              {
+                "ville": "PARIS",
+                "codePostal": "75016",
+                "codePaysISO": {
+                  "type": 77,
+                  "stringValue": "FR"
+                },
+                "ligne": [
+                  ""
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "0140665508"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 40,
+              "stringValue": "fr"
+            },
+            "anyObject": [],
+            "dprparDefaut": false,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "pnrDpra": 1,
+            "priceCondition": 1,
+            "enteteDMS": "1234",
+            "facturation": 0,
+            "autorisation": 2,
+            "detailSite": 0,
+            "manquant": 1,
+            "iam": 1,
+            "stockDMS": 1,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          },
+          {
+            "identifiantReseau": "XCAPHD1",
+            "nomCommercial": "XCAPHD1",
+            "adresse": [
+              {
+                "ville": "XCAPHD1",
+                "codePostal": "XCAPHD1",
+                "codePaysISO": {
+                  "type": 100,
+                  "stringValue": "HU"
+                },
+                "ligne": [
+                  "XCAPHD1 XCAPHD1"
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": ""
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 40,
+              "stringValue": "fr"
+            },
+            "anyObject": [],
+            "dprparDefaut": false,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "priceCondition": 1,
+            "facturation": 0,
+            "autorisation": 0,
+            "detailSite": 0,
+            "manquant": 0,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          },
+          {
+            "identifiantReseau": "XDEMO2A",
+            "nomCommercial": "DPR DEMO",
+            "adresse": [
+              {
+                "ville": "PARIS",
+                "codePostal": "75017",
+                "codePaysISO": {
+                  "type": 77,
+                  "stringValue": "FR"
+                },
+                "ligne": [
+                  "Colisée 1 67 rue Arago"
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "01 43 67 31 31",
+                "fax": "0354554510",
+                "email": "demo.brr@psa.com",
+                "libellePosteDeTravail": "SIDM/AGTD/AVRE"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 68,
+              "stringValue": "it"
+            },
+            "anyObject": [],
+            "dprparDefaut": false,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "pnrDpra": 1,
+            "priceCondition": 1,
+            "enteteDMS": "13168",
+            "facturation": 0,
+            "autorisation": 1,
+            "detailSite": 0,
+            "manquant": 1,
+            "iam": 0,
+            "stockDMS": 1,
+            "paiementEnLigne": 1,
+            "offrePre": 1,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          },
+          {
+            "identifiantReseau": "XEXT04A",
+            "nomCommercial": "SARL Distributeur FR",
+            "adresse": [
+              {
+                "ville": "NEW DEALER",
+                "codePostal": ".AB123",
+                "codePaysISO": {
+                  "type": 24,
+                  "stringValue": "BE"
+                },
+                "ligne": [
+                  "DUMMY DEALER"
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "025054510",
+                "fax": "0354554510",
+                "email": "demo.brr@mpsa.com"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 40,
+              "stringValue": "fr"
+            },
+            "anyObject": [],
+            "dprparDefaut": false,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "priceCondition": 1,
+            "facturation": 0,
+            "autorisation": 0,
+            "detailSite": 0,
+            "manquant": 0,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          },
+          {
+            "identifiantReseau": "XEXTZNK",
+            "nomCommercial": "DEMOITALIE",
+            "adresse": [
+              {
+                "ville": "MILANO",
+                "codePostal": "64000",
+                "codePaysISO": {
+                  "type": 112,
+                  "stringValue": "IT"
+                },
+                "ligne": [
+                  "Rue des Tests"
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "0861786475 "
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 68,
+              "stringValue": "it"
+            },
+            "anyObject": [],
+            "dprparDefaut": false,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "priceCondition": 1,
+            "facturation": 0,
+            "autorisation": 2,
+            "detailSite": 0,
+            "manquant": 0,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          },
+          {
+            "identifiantReseau": "XFORMED",
+            "nomCommercial": "-",
+            "adresse": [
+              {
+                "ville": "Madrid",
+                "codePostal": "98764",
+                "codePaysISO": {
+                  "type": 69,
+                  "stringValue": "ES"
+                },
+                "ligne": [
+                  ""
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "0605040302"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 40,
+              "stringValue": "fr"
+            },
+            "anyObject": [],
+            "dprparDefaut": false,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "priceCondition": 1,
+            "facturation": 0,
+            "autorisation": 0,
+            "detailSite": 0,
+            "manquant": 0,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          },
+          {
+            "identifiantReseau": "XIMACDS",
+            "nomCommercial": "Test importer AC and DS",
+            "adresse": [
+              {
+                "ville": "BUDAPEST",
+                "codePostal": "1111",
+                "codePaysISO": {
+                  "type": 100,
+                  "stringValue": "HU"
+                },
+                "ligne": [
+                  ""
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "999"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 6,
+              "stringValue": "en"
+            },
+            "anyObject": [],
+            "dprparDefaut": false,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "priceCondition": 1,
+            "facturation": 0,
+            "autorisation": 0,
+            "detailSite": 0,
+            "manquant": 0,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          },
+          {
+            "identifiantReseau": "XTEST03",
+            "nomCommercial": "TEST DSIN CDS",
+            "adresse": [
+              {
+                "ville": "poissy",
+                "codePostal": "paris",
+                "codePaysISO": {
+                  "type": 77,
+                  "stringValue": "FR"
+                },
+                "ligne": [
+                  "-"
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "8547895652",
+                "fax": "366",
+                "email": "test@test.com",
+                "libellePosteDeTravail": "test"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 40,
+              "stringValue": "fr"
+            },
+            "anyObject": [],
+            "dprparDefaut": true,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "pnrDpra": 1,
+            "priceCondition": 1,
+            "enteteDMS": "null",
+            "facturation": 0,
+            "autorisation": 2,
+            "detailSite": 0,
+            "manquant": 0,
+            "iam": 0,
+            "stockDMS": 1,
+            "cmmplaquenouvcat": true,
+            "distribDPR2A": "XCPNR09",
+            "offrePre": 1,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          },
+          {
+            "identifiantReseau": "XTTIAM5",
+            "nomCommercial": "Test IAM RA AP",
+            "adresse": [
+              {
+                "ville": "0000000",
+                "codePostal": "0000000",
+                "codePaysISO": {
+                  "type": 77,
+                  "stringValue": "FR"
+                },
+                "ligne": [
+                  ""
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "0000000"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 40,
+              "stringValue": "fr"
+            },
+            "anyObject": [],
+            "dprparDefaut": false,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "pnrDpra": 1,
+            "priceCondition": 1,
+            "facturation": 0,
+            "autorisation": 0,
+            "detailSite": 0,
+            "manquant": 0,
+            "iam": 1,
+            "stockDMS": 1,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          },
+          {
+            "identifiantReseau": "XTTIAM5",
+            "nomCommercial": "Test IAM RA AP",
+            "adresse": [
+              {
+                "ville": "0000000",
+                "codePostal": "0000000",
+                "codePaysISO": {
+                  "type": 77,
+                  "stringValue": "FR"
+                },
+                "ligne": [
+                  ""
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "0000000"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 40,
+              "stringValue": "fr"
+            },
+            "anyObject": [],
+            "dprparDefaut": false,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "pnrDpra": 1,
+            "priceCondition": 1,
+            "facturation": 0,
+            "autorisation": 0,
+            "detailSite": 0,
+            "manquant": 0,
+            "iam": 1,
+            "stockDMS": 1,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          }
+        ],
+        "identifiantReseau": "XDEMO1A",
+        "radprcount": 11
+      },
+      "getCategorieClientReponse": {
+        "getActivationPromotionReponse": {
+          "estActive": false
+        },
+        "getDPRParDefautOuUniqueReponse": {
+          "dprCodeRRDI": "XTEST03"
+        },
+        "getListeCategorieClientDPRReponse": {
+          "listeCategorieClientDPR": [],
+          "listeCategorieClientDPRCount": 0
+        },
+        "getListeCategorieClientFilialeReponse": {
+          "listeCategorieClientFiliale": [
+            {
+              "idCategorie": 1,
+              "libelle": "RA DVN"
+            },
+            {
+              "idCategorie": 2,
+              "libelle": "RA non DVN"
+            },
+            {
+              "idCategorie": 3,
+              "libelle": "RI"
+            },
+            {
+              "idCategorie": 4,
+              "libelle": "DPR"
+            },
+            {
+              "idCategorie": 5,
+              "libelle": "ERCSC"
+            },
+            {
+              "idCategorie": 6,
+              "libelle": "ERCSP"
+            }
+          ],
+          "listeCategorieClientFilialeCount": 6
+        },
+        "getListeClientCategorieParDPRReponse": {
+          "listeClientCategorie": [
+            {
+              "clientCodeRRDI": "017523T",
+              "idCategorie": 0
+            },
+            {
+              "clientCodeRRDI": "X885774",
+              "idCategorie": 3
+            },
+            {
+              "clientCodeRRDI": "XDEMO1B",
+              "idCategorie": 2
+            },
+            {
+              "clientCodeRRDI": "X957373",
+              "idCategorie": 6
+            },
+            {
+              "clientCodeRRDI": "X959201",
+              "idCategorie": 6
+            },
+            {
+              "clientCodeRRDI": "X959055",
+              "idCategorie": 0
+            },
+            {
+              "clientCodeRRDI": "XGRISP2",
+              "idCategorie": 2
+            },
+            {
+              "clientCodeRRDI": "X957216",
+              "idCategorie": 3
+            },
+            {
+              "clientCodeRRDI": "X957539",
+              "idCategorie": 6
+            },
+            {
+              "clientCodeRRDI": "X959104",
+              "idCategorie": 6
+            },
+            {
+              "clientCodeRRDI": "X959127",
+              "idCategorie": 3
+            }
+          ],
+          "listeClientCategorieCount": 11
+        },
+        "getUserCategorieClientReponse": {
+          "idCategorieClientFiliale": 2
+        }
+      },
+      "agendaSemaine": {
+        "agenda": [],
+        "erreur": 3,
+        "typeReceptionnaire": [],
+        "agendaCount": 0,
+        "typeReceptionnaireCount": 0
+      },
+      "concessionnaire": {
+        "error": 2,
+        "anyObject": [],
+        "anyObjectCount": 0
+      }
+    },
+    {
+      "famillePieceGeneriqueList": {
+        "choixGlobal": 3,
+        "choixPGSimple": 1,
+        "choixPGRemplacement": 2,
+        "famillePieceGenerique": [
+          {
+            "codeFamille": "002124",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0257726589257smp",
+                "ordre": 0
+              }
+            ],
+            "pieceGeneriqueCount": 1
+          },
+          {
+            "codeFamille": "003299",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0162879959724xeo",
+                "referenceLocale": "LAVGLASS",
+                "ordre": 0
+              }
+            ],
+            "pieceGeneriqueCount": 1
+          },
+          {
+            "codeFamille": "003304",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0162879642530HMk",
+                "ordre": 0
+              }
+            ],
+            "pieceGeneriqueCount": 1
+          },
+          {
+            "codeFamille": "014875",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0205111902579kkm",
+                "referenceLocale": "HUILE",
+                "ordre": 0
+              },
+              {
+                "codeDESI": "0162878490427Bkf",
+                "ordre": 1
+              },
+              {
+                "codeDESI": "0162878502337fsb",
+                "ordre": 2
+              },
+              {
+                "codeDESI": "0162878705508AEy",
+                "ordre": 3
+              }
+            ],
+            "pieceGeneriqueCount": 4
+          },
+          {
+            "codeFamille": "016401",
+            "pieceGeneriqueList": [
+              {
+                "codeDESI": "0238550893665oMt",
+                "ordre": 0
+              }
+            ],
+            "pieceGeneriqueCount": 1
+          }
+        ],
+        "famillePieceGeneriqueCount": 5
+      },
+      "reparateur": {
+        "activite": [],
+        "tauxMO": [
+          {
+            "typeTaux": "1",
+            "valeurTauxHTActuel": 50.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "2",
+            "valeurTauxHTActuel": 60.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "3",
+            "valeurTauxHTActuel": 70.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "F",
+            "valeurTauxHTActuel": 50.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "M1",
+            "valeurTauxHTActuel": 50.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "P",
+            "valeurTauxHTActuel": 0.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "P1",
+            "valeurTauxHTActuel": 50.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "Promo",
+            "valeurTauxHTActuel": 45.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeTaux": "T1",
+            "valeurTauxHTActuel": 50.0,
+            "anyObject": [],
+            "anyObjectCount": 0
+          }
+        ],
+        "caracteristique": [
+          {
+            "identifiant": "CA_1004",
+            "valeur": "700",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1370",
+            "valeur": "Neumáticos promoción",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1371",
+            "valeur": "62239",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1379",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1381",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1397",
+            "valeur": "1741",
+            "libelle": "normal europe",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1399",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1401",
+            "valeur": "1786",
+            "libelle": "privé",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1408",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1410",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1476",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1479",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_ContratsIcare",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1500",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1501",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1521",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_ecransynthese",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pnr_ActivationIBox",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pnr_ChoixUV",
+            "valeur": "2346",
+            "libelle": "Vente à l’unité du catalogue PSA ",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_PRID",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_UniversInterfaceDMS",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_FANPSABOX",
+            "valeur": "123456",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BVV_ACTIVATION",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Retour_Conditions",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Retour_nbJourRetour",
+            "valeur": "5",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pnr_activationDiWarranty",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "EstimationSansRef",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_Fleetbox",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PRI_001",
+            "valeur": "2945",
+            "libelle": "Oui, avec une interface \u003e ou \u003d V11 ",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PRI_002",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PRI_003",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "RDVINTERNET",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_Promotions",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DiffusionRVI",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "URL",
+            "valeur": "0",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DMS_PROTOCOLE",
+            "valeur": "3006",
+            "libelle": "internet (HTTPS)",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pnr_MasquerBoutonTransfer",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "AGA_ACTEUR_SMS",
+            "valeur": "3046",
+            "libelle": "SMSBox",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PRI_005",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pnr_activationMultipayeur",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Immat",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BVV_ACTIF",
+            "valeur": "3127",
+            "libelle": "Production ",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BVV_DIAL",
+            "valeur": "3136",
+            "libelle": "Pilotage + Production",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_DGCseuilPRaccord",
+            "valeur": "5",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_DGCDTPosition",
+            "valeur": "1",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_DGCDTlongueur",
+            "valeur": "8",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Meteo_Details",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_PiecesLiees",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_3523",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_PiecesLiees2",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pnr_mag_central",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pnr_cmd_ass",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_CmdeStock",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_MaxCmdeStock",
+            "valeur": "100",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "AGA_LCD",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "ActivMyQual",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Acces_stock_Prix",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DPR_MM",
+            "valeur": "3346",
+            "libelle": "DPR2A",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pnr_or_dms",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_MADD_INV",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OLB_LATENCE_FIL_B2B",
+            "valeur": "3387",
+            "libelle": "3",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OLB_LATENCE_PDV_B2B",
+            "valeur": "3394",
+            "libelle": "3",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OLB_LATENCE_FIL_B2C",
+            "valeur": "3402",
+            "libelle": "4",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OLB_LATENCE_PDV_B2C",
+            "valeur": "3408",
+            "libelle": "3",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pnr_DPRA",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pmm_mq_recep",
+            "valeur": "3567",
+            "libelle": "DS ",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "pmm_mq_nav",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_MQT_FILE",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "signaturenum",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Multisite",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OV_PAMIR",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DMS_TOKEN",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Tp_start",
+            "valeur": "2018-08-01",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Tp_end",
+            "valeur": "2019-08-02",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "popup_excellence",
+            "valeur": "4",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_CONTROL_VISUAL",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CMM_nouvcat",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CMM_Plaque_nouvcat",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "niv_abonnement",
+            "valeur": "3626",
+            "libelle": "2",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "date_fin_valid",
+            "valeur": "2099-06-13",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "nbre_login_autor",
+            "valeur": "1",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Videocheck",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Distrib_DPR2A",
+            "valeur": "Atish",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_CmdePartsPlan",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_ROADSIDE_ASSISTANCE",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OV_BRAND",
+            "valeur": "3725",
+            "libelle": "OPEL",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Recept_mm",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "test",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Paiement_ligne_clt_plaque",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "acces_epaiement_client",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_639",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "RUM_TRACK",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TMTS_Activation",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "JBN_ACTIVATION_MENU_PE",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OVDC",
+            "valeur": "yes",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "OVPC",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "LIEN_TMTS",
+            "valeur": "https://ppr.lead.services-store.citroen.com/",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Paiement_ligne_ouv_col",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TMTS_Activationreport",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TEST_CARAC_O_N",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "MEPNOVEMBRE",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "isOVSAGAIeRECADeployed",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_8265",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DMS_CORS_SECURE_KEY",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DMS_SUPPORTS_SECURE_CORS",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_8433",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "ISOLVE_available",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_MAG_OV",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_MAG_UI",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "delegation_tec_achat_diag",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_MAG_STOCK",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PowerReturn_NewPart",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PowerReturn_Quality",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PowerReturn_Deposit",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PowerReturn_Discrepancies",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PowerReturn_Warranty",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Wallbox",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_commandesinternes",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "AGA_ACTIVATION",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_SAGAI_CPR",
+            "valeur": "1",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_933",
+            "valeur": "10403",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_936",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_978",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_979",
+            "valeur": "9722",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_980",
+            "valeur": "656",
+            "libelle": "Mode temps réel DMS",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_982",
+            "valeur": "658",
+            "libelle": "RPI",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_983",
+            "valeur": "Fermeture exceptionnelle à Noël",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_985",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_986",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DMS_INTERFACE",
+            "valeur": "true",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "IP_DMS",
+            "valeur": "186316m-test-dmsservices.fr-midrange.com",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PORT_DMS",
+            "valeur": "443",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TYPE_DMS",
+            "valeur": "428",
+            "libelle": "REYNOLDS \u0026 REYNOLDS - DCSNET NEO",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1400",
+            "valeur": "0",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1538",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CA_1539",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "FDZ_campagnes",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "QTE_GOODYEAR",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "QTE_MICHELIN",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "QTE_CONTINENTAL",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "QTE_BRIDGESTONE",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "QTE_PIRELLI",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_commandesPR",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Pnr_CRM_PDV",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Retour_act",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Page_Accueil",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_Act",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_Act_PRE",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_MONT_Min_Avoir",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_MONT_Max_Avoir",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_Val_Min_PRE",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_VER",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_Age_Min",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_TVA_PRE",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PNR_VEI_TVA_PR",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BVV_LOG",
+            "valeur": "0",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "AccLivCmdMisterAuto",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PRDVforMisterAuto",
+            "valeur": "0",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "MessageMisterAuto",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DebutCongesBFMA",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "FinCongesBFMA",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_Revision",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_FiltreAir",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_FiltreHabitacle",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_FiltreGasoil",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_FiltreEssence",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_Bougie",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_PlaquettesAV",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_DisquesPlaquettesAV",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_PlaquettesAR",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_DisquesPlaquettesAR",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_Amortisseurs",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_CartouchesAmort",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_AmortisseursAR",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_Equilibrage",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_LectureCalc",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_RAZIndic",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_PurgeESP",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_PurgeSansESP",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_PneuMoins19",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_Pneu19",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_Pneu4x4",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_PneuUtil",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_PneuGeo",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "BFMA_PneuRepar",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PDV_DS",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DelaiAlerteRest",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Citroenoblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Peugeotoblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DSoblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Citroen",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Peugeot",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "DS",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Dos_ficheretour",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Dos_ficheretouche",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "trav_ht",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvCarross_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvDiag_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvMeca_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvEntretien_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvSansRdv_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvAttend_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvVeh_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvAttsRdv_Oblig",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvCarross",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvDiag",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvMeca",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvEntretien",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvSansRdv",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvAttend",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvAttsRdv",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "TypRdvVeh",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "ChAffMoy",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Obj_ficheretouche_sem",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Obj_ficheretouche_mois",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Obj_ficheretouche_an",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Obj_ficheretour_sem",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Obj_ficheretour_mois",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Obj_ficheretour_an",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PlanCtrlQual_sem",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PlanCtrlQual_mois",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PlanCtrlQual_an",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "CpteurObeya",
+            "valeur": "0",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "ActivFiltre",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "FDZ_Acces_Doc_Gratuite",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "Test_sana",
+            "valeur": "Test",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "PDV_Customer_First",
+            "valeur": "false",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "xxxxx",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "test_3",
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "identifiant": "JBN_URL_CATALOGUE_PRE",
+            "valeur": "http://precisrec.sidexa.fr/mpsa_servicebox_sso.php",
+            "anyObject": [],
+            "anyObjectCount": 0
+          }
+        ],
+        "caracteristiqueTab": [
+          {
+            "identifiant": "ORIGINE",
+            "cles": [
+              "001",
+              "101",
+              "003",
+              "002",
+              "004",
+              "124",
+              "006",
+              "GV1",
+              "TAC",
+              "MR1",
+              "APV",
+              "DR1",
+              "701",
+              "700"
+            ],
+            "valeurs": [
+              "BPA",
+              "EVA-drogenbos",
+              "Garage",
+              "Réparateurs",
+              "すべての人間は、生まれながらにして自由であり、かつ、尊厳と権",
+              "Cogestib",
+              "Atelier",
+              "GV1",
+              "TAC",
+              "MR1",
+              "OR LP32    FACT LP30   BP LP41",
+              "Meroni",
+              "RA Rennes",
+              "TAC"
+            ],
+            "anyObject": [],
+            "anyObjectCount": 0,
+            "clesCount": 14,
+            "valeursCount": 14
+          },
+          {
+            "identifiant": "IMPUTATION",
+            "cles": [
+              "7",
+              "2",
+              "4"
+            ],
+            "valeurs": [
+              "AP777777",
+              "AP222222",
+              "AP4444444"
+            ],
+            "anyObject": [],
+            "anyObjectCount": 0,
+            "clesCount": 3,
+            "valeursCount": 3
+          }
+        ],
+        "identifiantReseau": "XDEMO2B01 ",
+        "anyObject": [],
+        "anyObjectCount": 0,
+        "caracteristiqueCount": 230,
+        "caracteristiqueTabCount": 2,
+        "tauxMOCount": 9,
+        "activiteCount": 0
+      },
+      "pointDeVente": {
+        "denominationSociale": "DOPR DEMO",
+        "formeJuridique": "SA",
+        "statut": true,
+        "etablissement": [
+          {
+            "identifiantReseau": "XDEMO2B01 ",
+            "nomCommercial": "DOPR DEMO",
+            "adresse": [
+              {
+                "ville": "PARIS",
+                "codePostal": "75017",
+                "codePaysISO": {
+                  "type": 77,
+                  "stringValue": "FR"
+                },
+                "ligne": [
+                  "Colisée 1 67, rue Arago"
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "01 43 67 31 31",
+                "fax": "01 43 67 31 32",
+                "email": "demo.brr2yann@mpsa.com",
+                "libellePosteDeTravail": "SIDM/AGTD/AVRE"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "REYNOLDS \u0026 REYNOLDS - DCSNET NEO",
+                "ipdms": "186316m-test-dmsservices.fr-midrange.com",
+                "portDMS": 443,
+                "dmsinterface": true,
+                "anyObject": [],
+                "portDMSInt": 443,
+                "anyObjectCount": 0
+              }
+            ],
+            "fuseauHoraire": {
+              "javaTimeZoneId": "Europe/Madrid",
+              "decalageHoraire": 3600000,
+              "utiliseHeureEte": true,
+              "forcerNonUtilisationHeureEteHiver": true,
+              "anyObject": [],
+              "anyObjectCount": 0
+            },
+            "codeLangueISO": {
+              "type": 40,
+              "stringValue": "fr"
+            },
+            "anyObject": [],
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          }
+        ],
+        "numeroFitche": "1                                                               ",
+        "anyObject": [],
+        "identifiantReseau": "XDEMO2B",
+        "sagaiCode": "XDEMO2B",
+        "contrat": [
+          {
+            "typeContrat": "APV",
+            "marqueContrat": "AC",
+            "numeroContrat": "nullAPV",
+            "dateDebut": 1585177200000,
+            "dateFin": 4102354800000,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeContrat": "ERCS",
+            "marqueContrat": "AC",
+            "numeroContrat": "nullERCS",
+            "dateDebut": 1585177200000,
+            "dateFin": 4102354800000,
+            "anyObject": [],
+            "anyObjectCount": 0
+          },
+          {
+            "typeContrat": "APV",
+            "marqueContrat": "DS",
+            "numeroContrat": "nullAPV",
+            "dateDebut": 1590098400000,
+            "dateFin": 4102354800000,
+            "anyObject": [],
+            "anyObjectCount": 0
+          }
+        ],
+        "marquePSA": {
+          "type": 1,
+          "stringValue": "AC"
+        },
+        "tauxTVA": 20.0,
+        "typeClient": "DPR",
+        "codeZonePR": "FR",
+        "codeZoneMO": "MO1",
+        "codeDeviseISO": {
+          "type": 50,
+          "stringValue": "EUR"
+        },
+        "contratCount": 3,
+        "anyObjectCount": 0,
+        "etablissementCount": 1
+      },
+      "contacts": {
+        "contact": [
+          {
+            "codePDV": "XDEMO2B",
+            "codeAdresse": "01 ",
+            "idTypeContact": 1,
+            "numContact": 1,
+            "nomContact": "SIDM/AGTD/AVRE",
+            "prenomContact": "",
+            "telContact": "01 43 67 31 31",
+            "faxContact": "01 43 67 31 32",
+            "emailContact": "demo.brr2yann@mpsa.com",
+            "mobileContact": "",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1396336908000
+          },
+          {
+            "codePDV": "XDEMO2B",
+            "codeAdresse": "01 ",
+            "idTypeContact": 145,
+            "numContact": 2,
+            "nomContact": "LANGLOIS",
+            "prenomContact": "PHILIPPE",
+            "telContact": "3671171234567890123123456",
+            "faxContact": "",
+            "emailContact": "philippe.langlois12345678901234567890123456789001234567890012@mpsa.com",
+            "mobileContact": "",
+            "idUser": "c058592",
+            "idCivilite": 1,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1354123520000
+          },
+          {
+            "codePDV": "XDEMO2B",
+            "codeAdresse": "01 ",
+            "idTypeContact": 145,
+            "numContact": 4,
+            "nomContact": "ROBIEU",
+            "prenomContact": "SOPHIE",
+            "telContact": "299523",
+            "faxContact": "",
+            "emailContact": "sophier.robieu@mpsa.com",
+            "mobileContact": "",
+            "idUser": "p911584",
+            "idCivilite": 0,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1363621306000
+          },
+          {
+            "codePDV": "XDEMO2B",
+            "codeAdresse": "01 ",
+            "idTypeContact": 81,
+            "numContact": 5,
+            "nomContact": "LEDOUX",
+            "prenomContact": "OLIVIER",
+            "telContact": "452611",
+            "faxContact": "",
+            "emailContact": "olivier.ledoux@ext.mpsa.com",
+            "mobileContact": "",
+            "idUser": "e372569",
+            "idCivilite": 1,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1366704499000
+          },
+          {
+            "codePDV": "XDEMO2B",
+            "codeAdresse": "01 ",
+            "idTypeContact": 137,
+            "numContact": 6,
+            "nomContact": "PIERRE",
+            "prenomContact": "",
+            "telContact": "123456879",
+            "faxContact": "",
+            "emailContact": "",
+            "mobileContact": "",
+            "idUser": "D123546",
+            "idCivilite": 1,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1382446028000
+          },
+          {
+            "codePDV": "XDEMO2B",
+            "codeAdresse": "01 ",
+            "idTypeContact": 86,
+            "numContact": 7,
+            "nomContact": "BACCI Renaud",
+            "prenomContact": "",
+            "telContact": "654654621",
+            "faxContact": "",
+            "emailContact": "renaud.bacci@ext.mpsa.com",
+            "mobileContact": "",
+            "idCivilite": 1,
+            "statutContact": 1,
+            "observationContact": "",
+            "dateMAJ": 1563816061000
+          }
+        ],
+        "contactCount": 6
+      },
+      "lienRADPR": {
+        "radpr": [
+          {
+            "identifiantReseau": "010074A",
+            "nomCommercial": "SCDPR PARIS / ETS GONESSE",
+            "adresse": [
+              {
+                "ville": "GONESSE",
+                "codePostal": "95500",
+                "codePaysISO": {
+                  "type": 77,
+                  "stringValue": "FR"
+                },
+                "ligne": [
+                  "2 RUE GAY LUSSAC"
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "01 30 11 27 30",
+                "fax": "01 30 11 27 31",
+                "libellePosteDeTravail": "DANIELOU BRUNO"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 40,
+              "stringValue": "fr"
+            },
+            "anyObject": [],
+            "dprparDefaut": true,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "pnrDpra": 1,
+            "priceCondition": 1,
+            "facturation": 0,
+            "autorisation": 0,
+            "detailSite": 0,
+            "manquant": 0,
+            "stockDMS": 1,
+            "cmmplaquenouvcat": false,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          },
+          {
+            "identifiantReseau": "XTEST01",
+            "nomCommercial": "TEST DSIN CDS",
+            "adresse": [
+              {
+                "ville": "poisy",
+                "codePostal": "paris",
+                "codePaysISO": {
+                  "type": 77,
+                  "stringValue": "FR"
+                },
+                "ligne": [
+                  "-"
+                ],
+                "ligneCount": 1
+              }
+            ],
+            "posteDeTravail": [
+              {
+                "telephone": "874387348"
+              }
+            ],
+            "dms": [
+              {
+                "typeDMS": "",
+                "dmsinterface": false,
+                "anyObject": [],
+                "anyObjectCount": 0
+              }
+            ],
+            "codeLangueISO": {
+              "type": 40,
+              "stringValue": "fr"
+            },
+            "anyObject": [],
+            "dprparDefaut": false,
+            "transfertDMS": 0,
+            "transferOrder": 0,
+            "priceCondition": 1,
+            "facturation": 0,
+            "autorisation": 0,
+            "detailSite": 0,
+            "manquant": 0,
+            "stockDMS": 0,
+            "adresseCount": 1,
+            "anyObjectCount": 0,
+            "dmscount": 1,
+            "posteDeTravailCount": 1
+          }
+        ],
+        "identifiantReseau": "XDEMO2B",
+        "radprcount": 2
+      },
+      "getCategorieClientReponse": {
+        "getActivationPromotionReponse": {
+          "estActive": true
+        },
+        "getDPRParDefautOuUniqueReponse": {
+          "dprCodeRRDI": "010074A"
+        },
+        "getListeCategorieClientDPRReponse": {
+          "listeCategorieClientDPR": [],
+          "listeCategorieClientDPRCount": 0
+        },
+        "getListeCategorieClientFilialeReponse": {
+          "listeCategorieClientFiliale": [
+            {
+              "idCategorie": 1,
+              "libelle": "RA DVN"
+            },
+            {
+              "idCategorie": 2,
+              "libelle": "RA non DVN"
+            },
+            {
+              "idCategorie": 3,
+              "libelle": "RI"
+            },
+            {
+              "idCategorie": 4,
+              "libelle": "DPR"
+            },
+            {
+              "idCategorie": 5,
+              "libelle": "ERCSC"
+            },
+            {
+              "idCategorie": 6,
+              "libelle": "ERCSP"
+            }
+          ],
+          "listeCategorieClientFilialeCount": 6
+        },
+        "getListeClientCategorieParDPRReponse": {
+          "listeClientCategorie": [
+            {
+              "clientCodeRRDI": "XTALT05",
+              "idCategorie": 2
+            },
+            {
+              "clientCodeRRDI": "XDEMO1B",
+              "idCategorie": 2
+            },
+            {
+              "clientCodeRRDI": "XTALT06",
+              "idCategorie": 2
+            },
+            {
+              "clientCodeRRDI": "XTALT07",
+              "idCategorie": 2
+            },
+            {
+              "clientCodeRRDI": "X957961",
+              "idCategorie": 3
+            }
+          ],
+          "listeClientCategorieCount": 5
+        },
+        "getUserCategorieClientReponse": {
+          "idCategorieClientFiliale": 2
+        }
+      },
+      "agendaSemaine": {
+        "agenda": [],
+        "erreur": 3,
+        "typeReceptionnaire": [],
+        "agendaCount": 0,
+        "typeReceptionnaireCount": 0
+      },
+      "concessionnaire": {
+        "error": 2,
+        "anyObject": [],
+        "anyObjectCount": 0
+      }
+    }
+  ]
+}</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>Test Ended......</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>PASSED</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='3328fd6f-2519-4edf-9ec0-3273056b3d9d'>
+											<div class='test-head'>
+												<span class='test-name'>TC002_VerifyStatusCode </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-06-22 15:06:11</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>TC002_VerifyStatusCode</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>Test Starting......</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>Successfully validated HTTPStatusCode, Current HTTPStatusCode is :: 200</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>API response time is :: 143</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>Test Ended......</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>PASSED</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='02f865c1-b0db-4eb9-86cc-1583158ecf2f'>
+											<div class='test-head'>
+												<span class='test-name'>TC003_VerifyKeys </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-06-22 15:06:11</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-06-22 15:06:11</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 0s+187ms</span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>TC003_VerifyKeys</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>Test Starting......</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>Value of physicalSiteId is X234567890</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>Test Ended......</td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>15:06:11</td>
+																	<td class='step-details'>PASSED</td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id='test-details-wrapper' class='col _addedCell2'>
+					<div class='contents'>
+						<div class='card-panel details-view'>
+							<h5 class='details-name'></h5>
+							<div class='step-filters right'>
+								<span class='btn-floating btn-small waves-effect waves-light blue' status='info' alt='info' title='info'><i class='mdi-action-info-outline'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light green' status='pass' alt='pass' title='pass'><i class='mdi-action-check-circle'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light red' status='fail' alt='fail' title='fail'><i class='mdi-navigation-cancel'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light red darken-4' status='fatal' alt='fatal' title='fatal'><i class='mdi-navigation-cancel'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light red lighten-2' status='error' alt='error' title='error'><i class='mdi-alert-error'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light orange' alt='warning' status='warning' title='warning'><i class='mdi-alert-warning'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light cyan' status='skip' alt='skip' title='skip'><i class='mdi-content-redo'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light grey darken-2' status='clear-step-filter' alt='Clear filters' title='Clear filters'><i class='mdi-content-clear'></i></span>
+							</div>
+							<div class='details-container'>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /tests -->
+			
+			<!-- categories -->
+			<!-- /categories -->
+			
+			<!-- exceptions -->
+			<!-- /exceptions -->
+			
+			<!-- testrunner logs -->
+			<!-- /testrunner logs -->
+			
+		</div>
+		<!-- /container -->
+		
+		<!-- test dashboard counts setting -->
+		<div id='test-count-setting' class='modal bottom-sheet'> 
+			<div class='modal-content'> 
+				<h5>Configure Tests Count Setting</h5> 
+				<input name='test-count-setting' type='radio' id='parentWithoutNodes' class='with-gap'> 
+				<label for='parentWithoutNodes'>Parent Tests Only (Does not include child nodes in counts)</label> 
+				<br> 
+				<input name='test-count-setting' type='radio' id='parentWithoutNodesAndNodes' class='with-gap'> 
+				<label for='parentWithoutNodesAndNodes'>Parent Tests Without Child Tests + Child Tests</label> 
+				<br> 
+				<input name='test-count-setting' type='radio' id='childNodes' class='with-gap'> 
+				<label for='childNodes'>Child Tests Only</label> 
+			</div> 
+			<div class='modal-footer'> 
+				<a href='#!' class='modal-action modal-close waves-effect waves-green btn'>Save</a> 
+			</div> 
+		</div>
+		<!-- /test dashboard counts setting -->
+		
+		<!-- filter for step status -->
+		<div id='step-status-filter' class='modal bottom-sheet'> 
+			<div class='modal-content'> 
+				<h5>Select status</h5> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-pass'> 
+				<label for='step-dashboard-filter-pass'>Pass</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-fail'> 
+				<label for='step-dashboard-filter-fail'>Fail</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-fatal'> 
+				<label for='step-dashboard-filter-fatal'>Fatal</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-error'> 
+				<label for='step-dashboard-filter-error'>Error</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-warning'> 
+				<label for='step-dashboard-filter-warning'>Warning</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-skip'> 
+				<label for='step-dashboard-filter-skip'>Skipped</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-info'> 
+				<label for='step-dashboard-filter-info'>Info</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-unknown'> 
+				<label for='step-dashboard-filter-unknown'>Unknown</label> 
+			</div>
+			<div class='modal-footer'> 
+				<a href='#!' class='modal-action modal-close waves-effect waves-green btn'>Save</a> 
+			</div> 
+		</div>
+		<!-- /filter for step status -->
+		
+		<script src='https://cdn.rawgit.com/anshooarora/extentreports/6032d73243ba4fe4fb8769eb9c315d4fdf16fe68/cdn/extent.js' type='text/javascript'></script>
+
+		<script>$(document).ready(function() { $('.logo span').html('ExtentReports'); });</script>
+		<script>
+				
+            
+                $(document).ready(function() {
+                    
+                });
+            
+        
+		</script>
+	</body>
+</html>

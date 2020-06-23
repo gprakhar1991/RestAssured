@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="7308" started-at="2020-06-22T17:00:04Z" finished-at="2020-06-22T17:00:11Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="7308" started-at="2020-06-22T17:00:04Z" finished-at="2020-06-22T17:00:11Z">
+      <class name="com.qa.psa.test.GetAPIDemo">
+        <test-method status="PASS" signature="endTest()[pri:0, instance:com.qa.psa.test.GetAPIDemo@5622fdf]" name="endTest" is-config="true" duration-ms="47" started-at="2020-06-22T19:00:04Z" finished-at="2020-06-22T19:00:04Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- endTest -->
+        <test-method status="PASS" signature="startTest()[pri:0, instance:com.qa.psa.test.GetAPIDemo@5622fdf]" name="startTest" is-config="true" duration-ms="0" started-at="2020-06-22T19:00:04Z" finished-at="2020-06-22T19:00:04Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startTest -->
+        <test-method status="PASS" signature="initURL()[pri:0, instance:com.qa.psa.test.GetAPIDemo@5622fdf]" name="initURL" is-config="true" duration-ms="1675" started-at="2020-06-22T19:00:04Z" finished-at="2020-06-22T19:00:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initURL -->
+        <test-method status="PASS" signature="TC001()[pri:0, instance:com.qa.psa.test.GetAPIDemo@5622fdf]" name="TC001" duration-ms="3751" started-at="2020-06-22T19:00:06Z" finished-at="2020-06-22T19:00:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC001 -->
+        <test-method status="PASS" signature="TC002()[pri:0, instance:com.qa.psa.test.GetAPIDemo@5622fdf]" name="TC002" duration-ms="484" started-at="2020-06-22T19:00:10Z" finished-at="2020-06-22T19:00:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC002 -->
+        <test-method status="PASS" signature="TC003()[pri:0, instance:com.qa.psa.test.GetAPIDemo@5622fdf]" name="TC003" duration-ms="720" started-at="2020-06-22T19:00:10Z" finished-at="2020-06-22T19:00:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC003 -->
+      </class> <!-- com.qa.psa.test.GetAPIDemo -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
